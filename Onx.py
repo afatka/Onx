@@ -16,8 +16,8 @@ class OnxFileManager(object):
 		self.log('kwargs: {}'.format(kwargs))
 		self.full_vis = kwargs.get('vis', False) #sets default visibility for the interface
 		self.write_log = kwargs.get('log', False) #sets default logging behavior
-		self.colorize = kwargs.get('colorize', True) #sets default colorize behavior
-		self.auto_sort = kwargs.get('autoSort', True) #sets default color sorting behavior)
+		self.colorize = kwargs.get('colorize', False) #sets default colorize behavior
+		self.auto_sort = kwargs.get('autoSort', False) #sets default color sorting behavior)
 
 		self.log('write_log: {}'.format(self.write_log))
 
@@ -189,7 +189,7 @@ class OnxFileManager(object):
 		self.log('fire up logging and write logs')
 		if self.write_log == True:
 			self.logger = logging.getLogger(__name__)
-			print('name: {}'.format(__name__))
+			print(('name: {}'.format(__name__)))
 			handler = logging.FileHandler(directory + 'Onx.log')
 			formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt = '%m/%d/%y %H:%M' )
 			handler.setFormatter(formatter)
@@ -569,7 +569,7 @@ class OnxFileManager(object):
 		if dialog == 'Add Files':
 			self.log('Add Files')
 			dialog_return = self.runFileManager(1)
-			print('dialog_return: {}'.format(dialog_return))
+			print(('dialog_return: {}'.format(dialog_return)))
 		elif dialog == 'Remove Color, Done!':
 			self.log('Removing Color...done!')
 			self.clear_colors()
@@ -781,7 +781,7 @@ class OnxFileManager(object):
 		    cmds.textScrollList(self.incompleteFilesScrollList, edit = True, selectIndexedItem = [i])
 
 		selectedUniqueTags = cmds.textScrollList(self.incompleteFilesScrollList, query = True, selectUniqueTagItem = True)
-		list_items =  zip(selected, selectedUniqueTags)
+		list_items =  list(zip(selected, selectedUniqueTags))
 		return list_items
 
 	def reset(self):
@@ -791,4 +791,4 @@ class OnxFileManager(object):
 
 	def log(self, message, prefix = 'Onx: '):
 		if self.development:
-			print('{0} {1}'.format(prefix, message))
+			print(('{0} {1}'.format(prefix, message)))

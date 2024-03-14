@@ -44,7 +44,7 @@ def install():
 from Onx import Onx
 #reload(Onx)
 onx = Onx.OnxFileManager()
-print 'Onx Launcher - Fire!'
+print ('Onx Launcher - Fire!')
 		""",
 		sourceType = 'python', 
 		label = 'Onx'
